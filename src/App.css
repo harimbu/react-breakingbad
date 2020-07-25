@@ -1,38 +1,142 @@
-.App {
-  text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+    background: #000;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container {
+    background: #000 url(./img/bg.jpg) no-repeat center;
+    background-size: cover;
+    text-align: center;
+    padding: 3rem 1rem;
+    height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1 {
+    color: #fff;
 }
 
-.App-link {
-  color: #61dafb;
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logo {
+    width: 160px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    margin: 3rem auto;
+    width: 80%;
+    max-width: 400px;
+}
+
+input {
+    border: none;
+    outline: none;
+    padding: 14px;
+    background: #eeebdd;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+
+.card_container {
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: 1fr;
+}
+
+.cards {
+    width: 90%;
+    height: 360px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.card {
+    width: 100%;
+    height: 360px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    transition: transform 0.6s;
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+}
+
+.front {
+    transform: perspective(1200px) rotateY(0deg);
+}
+
+.back {
+    background: #d6d8be;
+    transform: perspective(1200px) rotateY(180deg);
+}
+
+.cards:hover .front {
+    transform: perspective(1200px) rotateY(-180deg);
+}
+
+.cards:hover .back {
+    transform: perspective(1200px) rotateY(0deg);
+}
+
+.spinner {
+    text-align: center;
+}
+
+.spinner img {
+    text-align: center;
+}
+
+.content h2 {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #666;
+}
+
+.content p {
+    text-align: left;
+    padding: 2px 0;
+}
+
+@media (min-width: 576px) {
+    .card_container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 768px) {
+    .card_container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 992px) {
+    .card_container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 1200px) {
+    .card_container {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 }

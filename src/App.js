@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import Header from './components/Header';
+import Actor from './components/Actor';
+import axios from 'axios';
 import './App.css';
+import Loading from './components/Loading';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [actors, setActors] = useState([]);
+    const [isLoading, setIsloading] = useState(true);
+    const [input, setInput] = useState('');
+
+    useEffect(() => {
+        async function getItem() {
+            const response = await axios(
+                `https://www.breakingbadapi.com/api/characters?name=${input}`
+            );
+            setActors(response.data);
+            setIsloading(false);
+        }
+        getItem();
+    }, [input]);
+
+    return (
+        <div className='container'>
+            <Header />
+            <form layout='inline'>
+                <input
+                    type='text'
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
+                    placeholder='Search Character'
+                />
+            </form>
+            <div className='card_wrapper'>
+                {isLoading ? <Loading /> : <Actor actors={actors} />}
+            </div>
+        </div>
+    );
 }
 
 export default App;
